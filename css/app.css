@@ -1,0 +1,172 @@
+
+/*body {
+    padding: 10px 0px;
+    font-family: Verdana;
+    padding: 4.5rem 0;
+    background-color: #99ccff;
+}
+.bg-wifi { background-color:#000055; }
+
+
+.my-image { height: 100px; }
+.person-list { list-style-type:none; }
+.person-item { margin-top:15px; border: 1px solid #c9c9c9; border-radius: 8px; box-shadow: 5px 5px #898989; }
+
+.person-fieldname { float:left; font-weight:bold; }
+.person-value { float:left; margin-left:5px; }
+.person-img-container { float: left; padding: 5px 10px; width: 20%; text-align: center; }
+.person-fld-container { float: left; padding:2px 10px; width:80%;  }
+.person-fld-row { display: table-row; }
+.person-fld-cell { display: table-cell; }
+
+.fa-cursor-hand { cursor:pointer; }
+
+.bg-instacar{background-color:#0000FF;}
+
+
+
+.centerLogin{
+    text-align : center;
+    padding : 100px 0px;
+}
+
+.hidden{
+    display : none;
+}*/
+
+.pre-scrollable {
+    max-height: 100rem;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+.bg-instacar {
+    background-color: #0000FF;
+}
+
+.showcase-bg {
+    background-color: rgba(0,0,255,0.3);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', sans-serif;
+
+    font-weight: 200;
+}
+
+header.masthead {
+    position: relative;
+    background-color: #343a40;
+    background: url("../images/bg-masthead.jpg") no-repeat center center;
+    background-size: cover;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+
+    header.masthead .overlay {
+        position: absolute;
+        background-color: #212529;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.3;
+    }
+
+    header.masthead h1 {
+        font-size: 2rem;
+    }
+
+@media (min-width: 768px) {
+    header.masthead {
+        padding-top: 12rem;
+        padding-bottom: 12rem;
+    }
+
+        header.masthead h1 {
+            font-size: 3rem;
+        }
+}
+
+.showcase .showcase-text {
+    padding: 3rem;
+}
+
+.showcase .showcase-img {
+    min-height: 30rem;
+    background-size: cover;
+}
+
+@media (min-width: 768px) {
+    .showcase .showcase-text {
+        padding: 7rem;
+    }
+}
+
+.features-icons {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+    .features-icons .features-icons-item {
+        max-width: 20rem;
+    }
+
+        .features-icons .features-icons-item .features-icons-icon {
+            height: 7rem;
+        }
+
+            .features-icons .features-icons-item .features-icons-icon i {
+                font-size: 10rem;
+            }
+
+        .features-icons .features-icons-item:hover .features-icons-icon i {
+            font-size: 9rem;
+        }
+
+.testimonials {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+    .testimonials .testimonial-item {
+        max-width: 18rem;
+    }
+
+        .testimonials .testimonial-item img {
+            max-width: 12rem;
+            -webkit-box-shadow: 0px 5px 5px 0px #adb5bd;
+            box-shadow: 0px 5px 5px 0px #adb5bd;
+        }
+
+.call-to-action {
+    position: relative;
+    background-color: #343a40;
+    background: url("../img/bg-masthead.jpg") no-repeat center center;
+    background-size: cover;
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+    .call-to-action .overlay {
+        position: absolute;
+        background-color: #212529;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.3;
+    }
+
+footer.footer {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}

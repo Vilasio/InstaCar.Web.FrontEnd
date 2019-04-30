@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Wifi CRM</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/app.css" />
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- ______________________________________________________________________________________ -->
+    <!-- ____________________________________obere Navbar______________________________________ -->
+    <!-- ______________________________________________________________________________________ -->
+    <nav class="navbar navbar-dark bg-instacar fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand float-left" href="current"><img src="./images/LogoMini.png" /></a>
+            <a class="btn btn-primary float-right" href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <!-- ______________________________________________________________________________________ -->
+    <!-- _______________________________________Inhalt_________________________________________ -->
+    <!-- ______________________________________________________________________________________ -->
+    <div class="container inhalt">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4 centerLogin">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nutzername" id="inputUsername" />
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Password" id="inputPassword" />
+                </div>
+
+                <div class="form-group hidden" id="loginFailed" >
+                    Benutzername oder Passwort falsch.
+                </div>
+
+                <div class="form-group">
+                    <button class="btn-default" type="button" id="buttonSignIn">
+                        Anmelden
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+       
+
+    <!-- ______________________________________________________________________________________ -->
+    <!-- ____________________________________UntereNavabar_____________________________________ -->
+    <!-- ______________________________________________________________________________________ -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-instacar fixed-bottom">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavTop" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavTop">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="menuItemShowAll">Show all</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ______________________________________________________________________________________ -->
+    <!--- _____________________________________Script__________________________________________ -->
+    <!-- ______________________________________________________________________________________ -->
+    <script>
+        
+  
+
+        $('#buttonSignIn').click(async function (el) {
+            
+            var customer;
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'http://localhost/InstaCar.Web.Access/api/customer/login/' + $('#inputUsername').val() + '/' + $('#inputPassword').val(),false);
+            xhr.setRequestHeader('accept', 'application/json; charset=utf-8');
+            xhr.send();
+            customer = JSON.parse(xhr.response);
+           
+            
+            if (customer.customerid != 0 && customer.customerid != null) {
+                location.replace('vehicle.html?id='+ customer.customerid);
+            } else {
+                loginProblem();
+                console.log('status: Fehler bei Passwort oder Benutzname');
+            }
+
+
+        });
+
+        function loginProblem() {
+            var loginfailed = document.getElementById("loginFailed");
+            if (loginfailed.style.display == "none") {
+                loginfailed.style.display = "block";
+            } 
+        }
+    </script>
+
+</body>
+</html>

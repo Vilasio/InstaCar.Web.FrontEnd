@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Wifi CRM</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/app.css" />
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- ______________________________________________________________________________________ -->
+    <!-- ____________________________________obere Navbar______________________________________ -->
+    <!-- ______________________________________________________________________________________ -->
+    <nav class="navbar navbar-light bg-instacar static-top">
+        <div class="container">
+            <a class="navbar-brand float-left" href="current"><img src="./images/LogoMini.png" /></a>
+            <a class="btn btn-primary float-right" href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <!-- ______________________________________________________________________________________ -->
+    <!-- _______________________________________Inhalt_________________________________________ -->
+    <!-- ______________________________________________________________________________________ -->
+    <div class="container mt-1">
+        <div class="row">
+            <div class="col-12 pre-scrollable" id="divData">
+                <table class="table table-light table-sm table-striped" id="tableVehicle">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Modell</th>
+                            <th>Marke</th>
+                            <th>PS</th>
+                            <th>Preis</th>
+                            <th>Austattung</th>
+                            <th>Austattung</th>
+                            <th>Austattung</th>
+                            <th>Austattung</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <!-- /.col-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    
+
+    <!-- ______________________________________________________________________________________ -->
+    <!-- ____________________________________UntereNavabar_____________________________________ -->
+    <!-- ______________________________________________________________________________________ -->
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <il class="list-inline-item">
+                            <a href="#">Über uns</a>
+                        </il>
+                        <li class="list-inline-item">&sdot;</li>
+                        <il class="list-inline-item">
+                            <a href="#">Impressum</a>
+                        </il>
+                        <li class="list-inline-item">&sdot;</li>
+                        <il class="list-inline-item">
+                            <a href="#">AGB</a>
+                        </il>
+                        <li class="list-inline-item">&sdot;</li>
+                        <il class="list-inline-item">
+                            <a href="#">Kontakt</a>
+                        </il>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy;InstaCar 2019</p>
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item mr-3">
+                            <a href="#"><i class="fab fa-facebook fa-2x fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="#"><i class="fab fa-instagram fa-2x fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="#"><i class="fab fa-twitter fa-2x fa-fw"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ______________________________________________________________________________________ -->
+    <!--- _____________________________________Script__________________________________________ -->
+    <!-- ______________________________________________________________________________________ -->
+    <script>
+
+        let xhr2 = new XMLHttpRequest();
+
+        xhr2.open('GET', 'http://localhost/InstaCar.Web.Access/Api/Vehicle');
+        xhr2.setRequestHeader('accept', 'application/json; charset=utf-8');
+        //xhr.setRequestHeader('accept', 'application/xml');
+        xhr2.send();
+        xhr2.onload = function () {
+            //console.log(xhr.response);
+            var vehicle = JSON.parse(xhr2.response);
+            var html = '';
+
+            for (var i = 0; i < vehicle.length; i++) {
+                html = '<tr>';
+                html += '	<td><button class="btn btn-primary btn-sm"><span class="fas fa-car-side"></span> Mieten</button></td>';
+                html += '	<td>' + vehicle[i].modell + '</td>';
+                html += '	<td>' + vehicle[i].brand + '</td>';
+                html += '	<td>' + vehicle[i].hp + '</td>';
+                html += '	<td>' + vehicle[i].price + '</td>';
+                html += '	<td>' + (vehicle[i].feature1string ? vehicle[i].feature1string : '&nbsp;') + '</td>';
+                html += '	<td>' + (vehicle[i].feature2string ? vehicle[i].feature2string : '&nbsp;') + '</td>';
+                html += '	<td>' + (vehicle[i].feature3string ? vehicle[i].feature3string : '&nbsp;') + '</td>';
+                html += '	<td>' + (vehicle[i].feature4string ? vehicle[i].feature4string : '&nbsp;') + '</td>';
+                html += '</tr>';
+                $('#tableVehicle>tbody').append(html);
+            }
+
+        };
+    </script>
+
+</body>
+</html>

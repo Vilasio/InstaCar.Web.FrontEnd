@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-wifi fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavTop" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavTop">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="menuItemShowAll">Show all</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 pre-scrollable" id="divData">
+                <table class="table table-light table-sm table-striped" id="tableCustomer">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Cust No.</th>
+                            <th>Name</th>
+                            <th>First name</th>
+                            <th>Date of birth</th>
+                            <th>last login</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <!-- /.col-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <script>
+        /*
+		let xhr = new XMLHttpRequest();
+
+		xhr.open('GET', 'http://localhost/wifi.crm.access/api/customer');
+		xhr.setRequestHeader('accept', 'application/json; charset=utf-8');
+		//xhr.setRequestHeader('accept', 'application/xml');
+		xhr.send();
+		xhr.onload = function () {
+			//console.log(xhr.response);
+			var customers = JSON.parse(xhr.response);
+			var html = '';
+
+			for (var j = 0; j < 10; j++) {
+				for (var i = 0; i < customers.length; i++) {
+					html = '<tr ' + (customers[i].custnumber == '201903/001' ? 'class="d-none"' : '') + ' data-isdeleted="' + (customers[i].custnumber == '201903/001' ? 'true' : 'false') + '">';
+					html += '	<td><i class="far fa-lg fa-trash-alt fa-cursor-hand" data-customerid="' + customers[i].customerid + '"></i><a class="ml-2" href="customer.html?id=' + customers[i].customerid + '"><i class="far fa-lg fa-edit"></i></a></td>';
+					html += '	<td>' + customers[i].custnumber + '</td>';
+					html += '	<td>' + customers[i].name + '</td>';
+					html += '	<td>' + customers[i].firstname + '</td>';
+					html += '	<td>' + (customers[i].birthdate ? customers[i].birthdatestr : '&nbsp;') + '</td>';
+					html += '	<td>' + (customers[i].lastlogin ? customers[i].lastloginstr : '&nbsp;') + '</td>';
+					html += '</tr>';
+					$('#tableCustomer>tbody').append(html);
+				}
+
+			}
+
+			$('.fa-cursor-hand').click(function () {
+				var id = $(this).data('customerid');
+				console.log('löschen von id:' + id);
+			});
+
+
+		};
+
+		$('#menuItemShowAll').click(function () {
+			$('#tableCustomer>tbody>tr[data-isdeleted="true"]').toggleClass('d-none');
+		}); */
+
+
+    </script>
+</body>
+</html>
