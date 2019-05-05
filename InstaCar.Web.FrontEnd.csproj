@@ -61,6 +61,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="about.html" />
+    <Content Include="agb.html" />
+    <Content Include="contact.html" />
     <Content Include="css\all.min.css" />
     <Content Include="css\app.css" />
     <Content Include="css\bootstrap-grid.css" />
@@ -70,6 +73,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\simple-line-icons.css" />
+    <Content Include="impressum.html" />
     <Content Include="index1.html" />
     <Content Include="index.html" />
     <Content Include="js\bootstrap.bundle.js" />
@@ -80,7 +84,9 @@
     <Content Include="js\jquery-3.3.1.min.js" />
     <Content Include="js\popper.min.js" />
     <Content Include="login.html" />
+    <Content Include="rent.html" />
     <Content Include="userpage.html" />
+    <Content Include="vehicleRent.html" />
     <Content Include="vehicle.html" />
     <Content Include="vehicle2.html" />
     <Content Include="Web.config" />

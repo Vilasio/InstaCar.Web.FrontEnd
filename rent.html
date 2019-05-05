@@ -1,6 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
     <title>InstaCar-Fahrzeuge</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,7 +24,9 @@
 
     <script>
         var queryString = document.URL.split('?')[1];
-        var cid = queryString.split('=')[1];
+        var rid = queryString.split('=')[1];
+        var cid = queryString.split('=')[2];
+        var vid = queryString.split('=')[3];
         var rent = null;
     </script>
 </head>
@@ -56,15 +67,49 @@
             </div>
             <!-- /.col-12 -->
         </div>
+        <!-- /.row -->
         <div class="row">
-            <div class="col-lg-4 offset-lg-4">
-                <button class="btn btn-primary" type="button" id="buttonNewRent">
-                    Neuer Mietvorgang
-                </button>
+            <div class="col-lg-4 offset-lg-2">
+                <div class="form-group">
+                    <input type="datetime-local" class="form-control" name="Ende" id="inputRentBegin" />
+                </div>
+
+                <div class="form-group hidden" id="errorBegin">
+                    <span id="errorBeginText">cccc</span>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn-default" type="button" id="buttonBegin">
+                        Mieten JETZT beginnen
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-4 offset-lg-2">
+                <div class="form-group">
+                    <input type="datetime-local" class="form-control" name="Ende" id="inputRentEnd" />
+                </div>
+
+                <div class="form-group hidden" id="errorEnd">
+                    <span id="errorEndText">cccc</span>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn-default" type="button" id="buttonEnd">
+                        Mieten JETZT beenden
+                    </button>
+                </div>
             </div>
         </div>
-
-        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4">
+                <div class="form-group">
+                    <button class="btn-default" type="button" id="buttonSubmit">
+                        Mieten beenden
+                    </button>
+                </div>
+            </div>
+        </div>
+        
     </div>
 
 
@@ -73,7 +118,7 @@
     <!-- ______________________________________________________________________________________ -->
     <footer class="footer bg-light">
         <div class="container">
-            
+
             <div class="row">
                 <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
                     <ul class="list-inline mb-2">
@@ -116,39 +161,93 @@
     <!--- _____________________________________Script__________________________________________ -->
     <!-- ______________________________________________________________________________________ -->
     <script>
+        $(document).ready(function () {
+            
 
-        let xhr2 = new XMLHttpRequest();
+            if (rid != 0) {
+                let xhr2 = new XMLHttpRequest();
 
-        xhr2.open('GET', 'http://localhost/InstaCar.Web.Access/Api/Rent/Rented/' + cid, false);
-        xhr2.setRequestHeader('accept', 'application/json; charset=utf-8');
-        //xhr.setRequestHeader('accept', 'application/xml');
-        xhr2.send();
+                xhr2.open('GET', 'http://localhost/InstaCar.Web.Access/Api/Rent/SpecRent/' + rid, false);
+                xhr2.setRequestHeader('accept', 'application/json; charset=utf-8');
+                //xhr.setRequestHeader('accept', 'application/xml');
+                xhr2.send();
 
-        var rent = JSON.parse(xhr2.response);
-        var html = '';
-        if (rent.length != 0) {
-            for (var i = 0; i < rent.length; i++) {
-                var begin = new Date(rent[i].begin);
-                var now = new Date(Date.now());
-                var units = Math.ceil(Math.abs(begin.getTime() - now.getTime())/3600000);
-                html = '<tr>';
-                html += '	<td><a href="rent.html?id=' + rent[i].rentid + '"><button class="btn btn-primary btn-sm ><span class="far fa-edit"></span> Bearbeiten</button></a></td>';
-                html += '	<td>' + rent[i].modell + '</td>';
-                html += '	<td>' + rent[i].brand + '</td>';
-                html += '	<td>' + units + '</td>';
-                html += '	<td>' + begin.toLocaleDateString() +' '+ begin.toLocaleTimeString() + '</td>';
-                html += '</tr>';
-                $('#tableMyRent>tbody').append(html);
+                var rent = JSON.parse(xhr2.response);
+                var html = '';
+                if (rent.length != 0) {
+                    var begin = new Date(rent.begin);
+                    var now = new Date(Date.now());
+                    var units = Math.ceil(Math.abs(begin.getTime() - now.getTime()) / 3600000);
+                    html = '<tr>';
+                    html += '	<td><a href="rent.html?id=' + rent.rentid + '"><button class="btn btn-primary btn-sm ><span class="far fa-edit"></span> Bearbeiten</button></a></td>';
+                    html += '	<td>' + rent.modell + '</td>';
+                    html += '	<td>' + rent.brand + '</td>';
+                    html += '	<td>' + units + '</td>';
+                    html += '	<td>' + begin.toLocaleDateString() + ' ' + begin.toLocaleTimeString() + '</td>';
+                    html += '</tr>';
+                    $('#tableMyRent>tbody').append(html);
+                    $('#buttonBegin').attr("disabled", true);
+
+                } else {
+                    var noRent = document.getElementById("tableMyRent");
+                    noRent.style.display = "none";
+                    $('#headline').text('Es ist derzeit kein Fahrzeug gemietet.');
+                }
+            } else {
+                var noRent = document.getElementById("tableMyRent");
+                noRent.style.display = "none";
+                $('#buttonSubmit').text('Mieten beginnen');
+                $('#headline').text("Mietvorgang");
+                $('#buttonEnd').attr("disabled", true);
+
             }
-        } else {
-            var noRent = document.getElementById("tableMyRent");
-            noRent.style.display = "none";
-            $('#headline').text('Es ist derzeit kein Fahrzeug gemietet.');
-        }
-        
-        $('#buttonNewRent').click(function () {
-            window.location = 'vehicleRent.html?cid=' + cid;
+
         });
+
+        $('#buttonSubmit').click(function () {
+            
+            var begin = $('#inputRentBegin').val();
+            if (begin == "" || begin == null) {
+                $('#errorBegin').style.display = "block";
+                $('#errorBeginText').text('Es wurde kein Beginn festegelegt!');
+            }
+
+
+        });
+
+        $('#buttonBegin').click(function () {
+            var begin = $('#inputRentBegin').val();
+            if (begin != "" && begin != null) {
+                rent.begin = $('#inputRentBegin').val();
+            }
+            let xhr = new XMLHttpRequest();
+            rent = {};
+            rent.customerid = cid;
+            rent.carid = vid;  
+            xhr.open('POST', 'http://localhost/InstaCar.Web.Access/Api/Rent/rentbeginnow', rent);
+            xhr.setRequestHeader('content-type', 'application/json');
+            xhr.send(JSON.stringify(rent));
+            console.log(xhr.response);
+            location.replace('userpage.html?id=' + cid);
+
+
+        });
+
+        $('#buttonEnd').click(function () {
+            var end = $('#inputRentEnd').val();
+            if (end != "" && end != null) {
+
+            }
+            xhr.open('POST', 'http://localhost/InstaCar.Web.Access/Api/Rent/RentEnd/' + rid);
+            xhr.setRequestHeader('content-type', 'application/json');
+            xhr.send(JSON.stringify(rent));
+            console.log(xhr.response);
+            location.replace('userpage.html?id=' + cid);
+        });
+
+
+
+
     </script>
 
 </body>

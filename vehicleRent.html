@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>AGB</title>
+    <title>InstaCar-Fahrzeuge</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -12,6 +12,11 @@
     <script src="./js/jquery-3.3.1.min.js"></script>
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+    <script>
+        var queryString = document.URL.split('?')[1];
+        var cid = queryString.split('=')[1];
+        var rent = null;
+    </script>
 </head>
 <body>
     <!-- ______________________________________________________________________________________ -->
@@ -27,34 +32,32 @@
     <!-- ______________________________________________________________________________________ -->
     <!-- _______________________________________Inhalt_________________________________________ -->
     <!-- ______________________________________________________________________________________ -->
-    <!--Header-->
-
     <div class="container mt-1">
         <div class="row">
-            <div class="col-lg-4 offset-lg-4">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Nutzername" id="inputUsername" />
-                </div>
-
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Password" id="inputPassword" />
-                </div>
-
-                <div class="form-group hidden" id="loginFailed">
-                    Benutzername oder Passwort falsch.
-                </div>
-
-                <div class="form-group">
-                    <button class="btn-default" type="button" id="buttonSignIn">
-                        Anmelden
-                    </button>
-                </div>
+            <div class="col-12 pre-scrollable" id="divData">
+                <table class="table table-light table-sm table-striped" id="tableVehicle">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Modell</th>
+                            <th>Marke</th>
+                            <th>PS</th>
+                            <th>Preis</th>
+                            <th>Austattung</th>
+                            <th>Austattung</th>
+                            <th>Austattung</th>
+                            <th>Austattung</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
-
+            <!-- /.col-12 -->
         </div>
-
+        <!-- /.row -->
     </div>
-
+    
 
     <!-- ______________________________________________________________________________________ -->
     <!-- ____________________________________UntereNavabar_____________________________________ -->
@@ -103,35 +106,50 @@
     <!--- _____________________________________Script__________________________________________ -->
     <!-- ______________________________________________________________________________________ -->
     <script>
-        $('#buttonSignIn').click(async function (el) {
 
-            var customer;
-            var xhr = new XMLHttpRequest();
+        let xhr2 = new XMLHttpRequest();
 
-            xhr.open('GET', 'http://localhost/InstaCar.Web.Access/api/customer/login/' + $('#inputUsername').val() + '/' + $('#inputPassword').val(), false);
-            xhr.setRequestHeader('accept', 'application/json; charset=utf-8');
-            xhr.send();
-            customer = JSON.parse(xhr.response);
+        xhr2.open('GET', 'http://localhost/InstaCar.Web.Access/Api/Vehicle/available');
+        xhr2.setRequestHeader('accept', 'application/json; charset=utf-8');
+        //xhr.setRequestHeader('accept', 'application/xml');
+        xhr2.send();
+        xhr2.onload = function () {
+            //console.log(xhr.response);
+            var vehicle = JSON.parse(xhr2.response);
+            var html = '';
 
-
-            if (customer.customerid != 0 && customer.customerid != null) {
-                location.replace('userpage.html?id=' + customer.customerid);
-            } else {
-                loginProblem();
-                console.log('status: Fehler bei Passwort oder Benutzname');
+            for (var i = 0; i < vehicle.length; i++) {
+                html = '<tr>';
+                html += '	<td><img class="vehiclepic" src="" id="img'+ [i] +'" /></td>';
+                html += '	<td>' + vehicle[i].modell + '</td>';
+                html += '	<td>' + vehicle[i].brand + '</td>';
+                html += '	<td>' + vehicle[i].hp + '</td>';
+                html += '	<td>' + vehicle[i].price + '</td>';
+                html += '	<td>' + (vehicle[i].feature1string ? vehicle[i].feature1string : '&nbsp;') + '</td>';
+                html += '	<td>' + (vehicle[i].feature2string ? vehicle[i].feature2string : '&nbsp;') + '</td>';
+                html += '	<td>' + (vehicle[i].feature3string ? vehicle[i].feature3string : '&nbsp;') + '</td>';
+                html += '	<td>' + (vehicle[i].feature4string ? vehicle[i].feature4string : '&nbsp;') + '</td>';
+                html += '	<td><a href="rent.html?id=0=' + cid + '='+ vehicle[i].carid +'"><button class="btn btn-primary btn-sm ><span class="far fa-edit"></span> Bearbeiten</button></a></td>';
+                html += '</tr>';
+                $('#tableVehicle>tbody').append(html);
             }
 
+            for (var i = 0; i < vehicle.length; i++) {
+                $('#img' + [i]).attr('src', `data:image/png;base64,${vehicle[i].mainimage}`);
+                
+            }
+
+        };
+
+        $('#buttonVehicle').click(function()  {
+
+            var vid = $(this).text();
+            $("button").val(text)
 
         });
 
-        function loginProblem() {
-            var loginfailed = document.getElementById("loginFailed");
-            if (loginfailed.style.display == "") {
-                loginfailed.style.display = "block";
-            }
-        }
+        
     </script>
 
 </body>
 </html>
-

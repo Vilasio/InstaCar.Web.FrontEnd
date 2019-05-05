@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Wifi CRM</title>
+    <title>InstaCar-Fahrzeuge</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -19,7 +19,7 @@
     <!-- ______________________________________________________________________________________ -->
     <nav class="navbar navbar-light bg-instacar static-top">
         <div class="container">
-            <a class="navbar-brand float-left" href="current"><img src="./images/LogoMini.png" /></a>
+            <a class="navbar-brand float-left" href="index.html"><img src="./images/LogoMini.png" /></a>
             <a class="btn btn-primary float-right" href="login.html">Login</a>
         </div>
     </nav>
@@ -62,19 +62,19 @@
                 <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
                     <ul class="list-inline mb-2">
                         <il class="list-inline-item">
-                            <a href="#">Über uns</a>
+                            <a href="about.html">Über uns</a>
                         </il>
                         <li class="list-inline-item">&sdot;</li>
                         <il class="list-inline-item">
-                            <a href="#">Impressum</a>
+                            <a href="impressum.html">Impressum</a>
                         </il>
                         <li class="list-inline-item">&sdot;</li>
                         <il class="list-inline-item">
-                            <a href="#">AGB</a>
+                            <a href="agb.html">AGB</a>
                         </il>
                         <li class="list-inline-item">&sdot;</li>
                         <il class="list-inline-item">
-                            <a href="#">Kontakt</a>
+                            <a href="contact.html">Kontakt</a>
                         </il>
                     </ul>
                     <p class="text-muted small mb-4 mb-lg-0">&copy;InstaCar 2019</p>
@@ -82,13 +82,13 @@
                 <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item mr-3">
-                            <a href="#"><i class="fab fa-facebook fa-2x fa-fw"></i></a>
+                            <a href="https://www.facebook.com/insta.car.108"><i class="fab fa-facebook fa-2x fa-fw"></i></a>
                         </li>
                         <li class="list-inline-item mr-3">
-                            <a href="#"><i class="fab fa-instagram fa-2x fa-fw"></i></a>
+                            <a href="https://www.instagram.com/instacar_gmbh/"><i class="fab fa-instagram fa-2x fa-fw"></i></a>
                         </li>
                         <li class="list-inline-item mr-3">
-                            <a href="#"><i class="fab fa-twitter fa-2x fa-fw"></i></a>
+                            <a href="https://twitter.com/car_insta"><i class="fab fa-twitter fa-2x fa-fw"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -114,11 +114,11 @@
 
             for (var i = 0; i < vehicle.length; i++) {
                 html = '<tr>';
-                html += '	<td><button class="btn btn-primary btn-sm"><span class="fas fa-car-side"></span> Mieten</button></td>';
+                html += '	<td><img class="vehiclepic" src="" id="img'+ [i] +'" /></td>';
                 html += '	<td>' + vehicle[i].modell + '</td>';
                 html += '	<td>' + vehicle[i].brand + '</td>';
                 html += '	<td>' + vehicle[i].hp + '</td>';
-                html += '	<td>' + vehicle[i].price + '</td>';
+                html += '	<td>€' + vehicle[i].price + '</td>';
                 html += '	<td>' + (vehicle[i].feature1string ? vehicle[i].feature1string : '&nbsp;') + '</td>';
                 html += '	<td>' + (vehicle[i].feature2string ? vehicle[i].feature2string : '&nbsp;') + '</td>';
                 html += '	<td>' + (vehicle[i].feature3string ? vehicle[i].feature3string : '&nbsp;') + '</td>';
@@ -127,7 +127,14 @@
                 $('#tableVehicle>tbody').append(html);
             }
 
+            for (var i = 0; i < vehicle.length; i++) {
+                $('#img' + [i]).attr('src', `data:image/png;base64,${vehicle[i].mainimage}`);
+                
+            }
+
         };
+
+        
     </script>
 
 </body>

@@ -25,14 +25,20 @@
 
 
 
-.centerLogin{
-    text-align : center;
-    padding : 100px 0px;
+
+}*/
+
+.centerLogin {
+    text-align: center;
+    padding: 100px 0px;
 }
 
-.hidden{
-    display : none;
-}*/
+.hidden {
+    display: none;
+}
+.vehiclepic{
+    max-width: 150px;
+}
 
 .pre-scrollable {
     max-height: 100rem;
